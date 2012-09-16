@@ -1,0 +1,9 @@
++$10;Character Habits;Mr. Campbell;Homework Detention
++$10;Academic Habits;Mr. Campbell;Homework Detention
++$10;Social Skills/Pride;Mr. Campbell;Homework Detention
++$10;Attendance;Mr. Campbell;Homework Detention
++$10;Category;Mr. Campbell;Homework Detention
++$10;Category;Mr. Campbell;Homework Detention
+;;;
++$40
+$100
