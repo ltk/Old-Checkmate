@@ -185,8 +185,7 @@ $(window).load(function(){
     </div> 
 
     
-<div id="mobile-alert"><a href="mobile/" title="CheckMate Mobile">Check out our mobile site!</a></div>
-<div id="blue-back" style="width:960px;position:absolute;left:50%;height:100%;background:#21446D;margin-left:-480px;"></div>    
+<div id="blue-back" style="width:960px;position:absolute;left:50%;height:100%;background:#094736;margin-left:-480px;"></div>    
 <div id="wrapper" class="clearfix">
 		
         <header class="container_8 clearfix">
