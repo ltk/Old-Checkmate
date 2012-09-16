@@ -15,44 +15,48 @@ while ($row = mysql_fetch_object($result, 'Student')):
 endwhile;
 
 	// Populate the comments array with comment objects.
-	$startdate = date('Y-m-j',strtotime($_SESSION['t1']));
-	$enddate = date('Y-m-j',strtotime($_SESSION['t2']));
+	$startdate = date('Y-m-j 00:00:00',strtotime($_SESSION['t1']));
+	$enddate = date('Y-m-j 23:59:59',strtotime($_SESSION['t2']));
 	$startdate_print = date('M j, Y',strtotime($_SESSION['t1']));
 	$enddate_print = date('M j, Y',strtotime($_SESSION['t2']));
+	
 	$sql = "SELECT * from comments WHERE created BETWEEN '$startdate' AND '$enddate'";
 	$result = mysql_query($sql,$con);
 
 	while ($row = mysql_fetch_object($result, 'Comment')):
-		foreach ($students as $student):
-			if ($row->student == $student->id) {$student->comments[]=$row; }
-		endforeach;
+		if(!empty($students)){
+			foreach ($students as $student):
+				if ($row->student == $student->id) { $student->comments[]=$row; }
+			endforeach;
+		}
 	endwhile;
 	
 	//NEW CODE 2011-10-10
-	$sql = "SELECT * from comments";
-	$result_all = mysql_query($sql,$con);
-	if($result_all){
-	while ($row = mysql_fetch_object($result_all, 'Comment')):
-		if($students){
-		foreach ($students as $student):
+	// $sql = "SELECT * from comments WHERE created BETWEEN '$startdate' AND '$enddate'";
+	// $result_all = mysql_query($sql,$con);
+	// if($result_all){
+	// while ($row = mysql_fetch_object($result_all, 'Comment')):
+	// 	if($students){
+	// 	foreach ($students as $student):
 			
-			if ($row->student == $student->id) {$student->all_comments[]=$row; }
-		endforeach;
-		}
-	endwhile;
-	}
+	// 		if ($row->student == $student->id) {$student->all_comments[]=$row; }
+	// 	endforeach;
+	// 	}
+	// endwhile;
+	// }
 	//END NEW CODE 2011-10-10
+	$teacher_names = array();
 
+	$sql = "SELECT id, pref_name FROM teachers";
+	$teacher_info = mysql_query($sql,$con);
+	while($row = mysql_fetch_array($teacher_name)){
+		$teacher_names[$row['id']] = $row['pref_name'];
+	}
 	
 	foreach($students as $student):
-	foreach($student->comments as $comment):
-		$sql = "SELECT pref_name FROM teachers WHERE id='$comment->teacher'";
-		$teacher_name = mysql_query($sql,$con);
-		while($row = mysql_fetch_array($teacher_name))
-	  	{
-	  		$comment->teacher_name = $row['pref_name'];
-	  	}
-	endforeach;
+		foreach($student->comments as $comment):
+			$comment->teacher_name = $teacher_names[$comment->teacher];
+		endforeach;
 	endforeach;
 
 	$students_sorted = $students;
@@ -158,7 +162,7 @@ function SummarySheet($students)
 	// Column widths
 	$w = array(60, 40, 40);
 	
-	$header = ($_GET['class']==4) ? array('Student', 'Semester Average', 'This Week') : array('Student', 'Average for Year', 'This Week');
+	$header = ($_GET['class']==4) ? array('Student', 'Semester Average', 'This Period') : array('Student', 'Average for Year', 'This Period');
 	// Header
 	for($i=0;$i<count($header);$i++)
 		$this->Cell($w[$i],5,$header[$i],1,0,'C');
