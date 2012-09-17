@@ -2,6 +2,15 @@
 
 require_once('session.php');
 
+$category_labels = array(
+	1 => 'Pride',
+	2 => 'Passion',
+	3 => 'Bravery',
+	4 => 'Self-Awareness',
+	5 => 'Urgency',
+	6 => 'Attendance'
+);
+
 // If there is no user logged in, go to the login page.
 if ($_SESSION['teacher']==""):
 $referral = urlencode(str_replace('/checkmate/', '', $_SERVER['REQUEST_URI']));

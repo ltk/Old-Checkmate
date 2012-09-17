@@ -115,9 +115,9 @@ class Teacher
 		endforeach;
 		
 		if($counter>0):
-		echo '$'.round($sum/$counter, 2);
+			echo '$'.round($sum/$counter, 2);
 		else:
-		return false;
+			echo 'N/A';
 		endif;
 	}
 	
@@ -131,9 +131,9 @@ class Teacher
 		endforeach;
 		
 		if($counter>0):
-		echo '$'.round($sum, 2);
+			echo '$'.round($sum, 2);
 		else:
-		return false;
+			echo 'N/A';
 		endif;
 	}
 	
@@ -147,45 +147,50 @@ class Teacher
 		
 	}
 	
-	function comment_common_comment() {
+	function comment_common_comment( $in_box = true ) {
 		
 		$comments = array();
-		foreach($this->comments as $comment):
-			$comments["$comment->comment"]++;
-		endforeach;
-		max($comments);
-		$common_comment = array_keys($comments, max($comments));
-		echo $common_comment[0];
-		
+		if( ! empty( $this->comments ) ){
+			foreach($this->comments as $comment):
+				$comments["$comment->comment"]++;
+			endforeach;
+
+			max($comments);
+			$common_comment = array_keys($comments, max($comments));
+			if( $in_box ){
+				echo '<span style="font-size:14px;border-top:none;padding-top:0;">"' . $common_comment[0] . '"</span>';
+			} else {
+				echo '"' . $common_comment[0] . '"';
+			}
+			
+		} else {
+			echo 'N/A';
+		}	
 	}
 	
 	function comment_category_breakdown() {
-		
-		$character = 0;
-		$academic = 0;
-		$social = 0;
-		$attend = 0;
-		$character_sum = 0;
-		$academic_sum = 0;
-		$social_sum = 0;
-		$attend_sum = 0;
-		$character_count = 0;
-		$academic_count = 0;
-		$social_count = 0;
-		$attend_count = 0;
+		global $category_labels;
+		for( $i = 1; $i <= count( $category_labels ); $i++ ){
+			${"cat_$i"} = 0;
+			${"cat_" . $i . "_sum"} = 0;
+			${"cat_" . $i . "_count"} = 0;
+		}
 		
 		foreach($this->comments as $comment):
-			if($comment->category==1){ $character++; $character_sum += $comment->amount; $character_count++; }
-			if($comment->category==2){ $academic++; $academic_sum += $comment->amount; $academic_count++; }
-			if($comment->category==3){ $social++; $social_sum += $comment->amount; $social_count++; }
-			if($comment->category==4){ $attend++; $attend_sum += $comment->amount; $attend_count++; }
+			for( $i = 1; $i <= count( $category_labels ); $i++ ){
+				if($comment->category==$i){ ${"cat_$i"}++; ${"cat_" . $i . "_sum"} += $comment->amount; ${"cat_" . $i . "_count"}++; }
+				
+			}
 		endforeach;
-		echo 'Character Habits: '.$character.' comments | $'.$character_sum.' Total Sum | $'.round($character_sum/$character,2).' Average Comment Value<br/>';
-		echo 'Academic Habits: '.$academic.' comments | $'.$academic_sum.' Total Sum | $'.round($academic_sum/$academic,2).' Average Comment Value<br/>';
-		echo 'Social Habits: '.$social.' comments | $'.$social_sum.' Total Sum | $'.round($social_sum/$social,2).' Average Comment Value<br/>';
-		echo 'Attendance: '.$attend.' comments | $'.$attend_sum.' Total Sum | $'.round($attend_sum/$attend,2).' Average Comment Value';
+
+		for( $i = 1; $i <= count( $category_labels ); $i++ ){
+			if( ${"cat_$i"} > 0 ){
+				echo $category_labels[$i] . ' Habits: '.${"cat_$i"}.' comments | $'.${"cat_" . $i . "_sum"}.' Total Sum | $'.round(${"cat_" . $i . "_sum"}/${"cat_$i"},2).' Average Comment Value<br/>';
+			} else {
+				echo $category_labels[$i] . ' Habits: No Comments<br/>';
+			}
+		}
 	}
-	
 }
 
 

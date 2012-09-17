@@ -17,11 +17,11 @@ if ($dc):
 	endif;
 endif;
 
-$sql = "SELECT * from comments WHERE teacher=$teacher->id";
-$result = mysql_query($sql,$con);
+// $sql = "SELECT * from comments WHERE teacher=$teacher->id";
+// $result = mysql_query($sql,$con);
 
 
-while ($comments[] = mysql_fetch_array($result));
+// while ($comments[] = mysql_fetch_array($result));
 
 $s = $_GET['s'];
 

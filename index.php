@@ -2,13 +2,13 @@
 $page = "index.php";
 require_once('start.php');
 
-$sql = "SELECT * from comments WHERE teacher=$teacher->id";
-$result = mysql_query($sql,$con);
-if($result){
-while ($row = mysql_fetch_object($result, 'Comment')):
-	$teacher->comments[]=$row;
-endwhile;
-}
+// $sql = "SELECT * from comments WHERE teacher=$teacher->id";
+// $result = mysql_query($sql,$con);
+// if($result){
+// while ($row = mysql_fetch_object($result, 'Comment')):
+// 	$teacher->comments[]=$row;
+// endwhile;
+// }
 
 ?>
 
@@ -76,7 +76,7 @@ endwhile;
                     
 
 
-					<?php if($teacher->admin==1): ?>
+					<?php if( false ): // ...as in... just don't do it. ?>
 					
 					<div class="grid_7 leading clearfix" style="width:96%;">
 
@@ -92,7 +92,7 @@ endwhile;
 								<p>Total Comment Value: <?php $teacher->comment_sum(); ?></p>
 								<p>Total Number of Comments: <?php $teacher->comment_number(); ?></p>
 								<p>Comments by Category:<br/> <?php $teacher->comment_category_breakdown(); ?></p>
-								<p>Most Common Comment: "<?php $teacher->comment_common_comment(); ?>"</p>
+								<p>Most Common Comment: <?php $teacher->comment_common_comment( false ); ?></p>
 								<h3>This Week's Statistics</h3>
 								<ul class="isotope-widgets isotope-container clearfix">
 
@@ -136,7 +136,7 @@ endwhile;
 
 		                                <a class="button-blue ui-corner-all" href="#">
 
-		                                    <strong><span style="font-size:14px;border-top:none;padding-top:0;">"<?php $teacher->comment_common_comment(); ?>"</span></strong>
+		                                    <strong><?php $teacher->comment_common_comment(); ?></strong>
 
 		                                    <span>Most Common Comment</span>
 
@@ -189,7 +189,7 @@ endwhile;
 
 		                                <a class="button-blue ui-corner-all" href="#">
 
-		                                    <strong><span style="font-size:14px;border-top:none;padding-top:0;">"<?php $teacher->comment_common_comment(); ?>"</span></strong>
+		                                    <strong><?php $teacher->comment_common_comment(); ?></strong>
 
 		                                    <span>Most Common Comment</span>
 
