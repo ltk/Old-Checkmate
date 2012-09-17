@@ -154,7 +154,7 @@ $(window).load(function(){
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-16882938-2']);
+  _gaq.push(['_setAccount', 'UA-34891316-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -193,12 +193,6 @@ $(window).load(function(){
             <div id="primary-nav" class="grid_8">
 
                 <h1 font-family: 'Days One', sans-serif;>CheckMate</h1>
-
-                <form class="fr">
-
-                    <input id="quick-search" type="text" placeholder="Search..." />
-
-                </form>
 
                 <nav>
 	

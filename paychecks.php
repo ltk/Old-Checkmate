@@ -2,6 +2,15 @@
 $page = "paychecks.php";
 require_once('start.php');
 
+$start_ts = $_SESSION['t1'];	
+$end_ts = $_SESSION['t2'];
+$diff = strtotime($end_ts) - strtotime($start_ts);
+$days_since = round($diff / 86400);
+$weeks_since = floor($days_since/7);
+
+$sum = 40 * $weeks_since; 
+
+
 $sql = "SELECT * from students ORDER BY last_name ASC";
 $result = mysql_query($sql,$con);
 if($result){
@@ -166,8 +175,8 @@ $(function(){
 					if($students_sorted){
 					foreach ($students_sorted as $student):
 					if ($student->class == 4):
-					$red = ($student->current_paycheck_amount() < 40) ? 'background:#fee;' : '';
-					$green = ($student->current_paycheck_amount() > 40) ? 'background:#efe;' : '';
+					$red = ($student->current_paycheck_amount() < $sum) ? 'background:#fee;' : '';
+					$green = ($student->current_paycheck_amount() > $sum) ? 'background:#efe;' : '';
 					
 					
 					echo "<tr style='".$red.$green."'><td><a href='?student=".$student->id."'>".$student->last_name.", ".$student->first_name."</a>";
@@ -216,8 +225,8 @@ $(function(){
 					if($students_sorted){
 					foreach ($students_sorted as $student):
 					if ($student->class == 3):
-					$red = ($student->current_paycheck_amount() < 40) ? 'background:#fee;' : '';
-					$green = ($student->current_paycheck_amount() > 40) ? 'background:#efe;' : '';
+					$red = ($student->current_paycheck_amount() < $sum) ? 'background:#fee;' : '';
+					$green = ($student->current_paycheck_amount() > $sum) ? 'background:#efe;' : '';
 					
 					
 					echo "<tr style='".$red.$green."'><td><a href='?student=".$student->id."'>".$student->last_name.", ".$student->first_name."</a>";
@@ -266,8 +275,8 @@ $(function(){
 					if($students_sorted){
 					foreach ($students_sorted as $student):
 					if ($student->class == 2):
-					$red = ($student->current_paycheck_amount() < 40) ? 'background:#fee;' : '';
-					$green = ($student->current_paycheck_amount() > 40) ? 'background:#efe;' : '';
+					$red = ($student->current_paycheck_amount() < $sum) ? 'background:#fee;' : '';
+					$green = ($student->current_paycheck_amount() > $sum) ? 'background:#efe;' : '';
 					
 					
 					echo "<tr style='".$red.$green."'><td><a href='?student=".$student->id."'>".$student->last_name.", ".$student->first_name."</a>";
@@ -316,8 +325,8 @@ $(function(){
 					if($students_sorted){
 					foreach ($students_sorted as $student):
 					if ($student->class == 1):
-					$red = ($student->current_paycheck_amount() < 40) ? 'background:#fee;' : '';
-					$green = ($student->current_paycheck_amount() > 40) ? 'background:#efe;' : '';
+					$red = ($student->current_paycheck_amount() < $sum) ? 'background:#fee;' : '';
+					$green = ($student->current_paycheck_amount() > $sum) ? 'background:#efe;' : '';
 					
 					
 					echo "<tr style='".$red.$green."'><td><a href='?student=".$student->id."'>".$student->last_name.", ".$student->first_name."</a>";
@@ -371,15 +380,6 @@ $(function(){
 				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 6, 6); }  ?></td>
 				<td class='ac'><?php if($students) { echo "$".( pc_field($students, $current_record, 1, 1) + pc_field($students, $current_record, 2, 2) + pc_field($students, $current_record, 3, 3) + pc_field($students, $current_record, 4, 4) + pc_field($students, $current_record, 5, 5) + pc_field($students, $current_record, 6, 6)); }  ?></td>
 			</tr>
-			<?php
-			$start_ts = $_SESSION['t1'];	
-			$end_ts = $_SESSION['t2'];
-			$diff = strtotime($end_ts) - strtotime($start_ts);
-			$days_since = round($diff / 86400);
-			$weeks_since = floor($days_since/7);
-
-			$sum = 40 * $weeks_since; 
-			?>
 			<tr>
 				<td class='ac' colspan="6">Starting Amount:</td>
 				<td class='ac'>+ $<?php echo $sum; ?></td>
