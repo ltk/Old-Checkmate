@@ -189,12 +189,16 @@ while ($students[] = mysql_fetch_array($result));
 													<td><?php
 													$cat = $comment['category'];
 													if ($cat==1):
-													echo "Character";
+													echo "Pride";
 													elseif($cat==2):
-													echo "Academic";
+													echo "Passion";
 													elseif($cat==3):
-													echo "Social";
+													echo "Bravery";
 													elseif($cat==4):
+													echo "Self-Awareness";
+													elseif($cat==5):
+													echo "Urgency";
+													elseif($cat==6):
 													echo "Attendance";
 													endif;
 													?></td>

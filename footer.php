@@ -4,7 +4,7 @@
 
             <div class="grid_8">
 
-                <span class="fr" style="margin-right:30px;">&copy; 2011. All rights reserved. By Lawson T. Kurtz
+                <span class="fr" style="margin-right:30px;">&copy; 2012. All rights reserved. By Lawson T. Kurtz
 
             </div>
 

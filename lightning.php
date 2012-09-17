@@ -187,10 +187,12 @@ $students_sorted = $students;
                                                 <label for="form-category" class="form-label">Category <em>*</em></label><br/>
 
                                                 <div class="form-input" style="text-align:center;">
-	<label><input type="radio" name="category" class="form-category" id="form-category-1" value="1" checked /> 1: Character Habits</label><br/>
-	<label><input type="radio" name="category" class="form-category" id="form-category-2" value="2" /> 2: Academic Habits</label><br/>
-	<label><input type="radio" name="category" class="form-category" id="form-category-3" value="3" /> 3: Social Skills/Pride</label><br/>
-	<label><input type="radio" name="category" class="form-category" id="form-category-4" value="4" /> 4: Attendance</label></div>
+	<label><input type="radio" name="category" class="form-category" id="form-category-1" value="1" checked /> 1: Pride</label><br/>
+	<label><input type="radio" name="category" class="form-category" id="form-category-2" value="2" /> 2: Passion</label><br/>
+	<label><input type="radio" name="category" class="form-category" id="form-category-3" value="3" /> 3: Bravery</label><br/>
+	<label><input type="radio" name="category" class="form-category" id="form-category-4" value="4" /> 4: Self-Awareness</label><br/>
+	<label><input type="radio" name="category" class="form-category" id="form-category-5" value="5" /> 5: Urgency</label><br/>
+	<label><input type="radio" name="category" class="form-category" id="form-category-6" value="6" /> 6: Attendance</label></div>
 
                                             </div>
 

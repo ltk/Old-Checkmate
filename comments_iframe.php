@@ -182,10 +182,12 @@ while ($students[] = mysql_fetch_array($result));
                                                 <label for="form-category" class="form-label">Category <em>*</em></label><br/>
 
                                                 <div class="form-input" style="text-align:center;">
-	<label><input type="radio" name="category" id="form-category" value="1" <?php if($_GET['cat']==1){ echo 'checked'; } ?>/> Character Habits</label><br/>
-	<label><input type="radio" name="category" value="2" <?php if($_GET['cat']==2){ echo 'checked'; } ?> /> Academic Habits</label><br/>
-	<label><input type="radio" name="category" value="3" <?php if($_GET['cat']==3){ echo 'checked'; } ?>/> Social Skills/Pride</label><br/>
-	<label><input type="radio" name="category" value="4" <?php if($_GET['cat']==4){ echo 'checked'; } ?>/> Attendance</label></div>
+	<label><input type="radio" name="category" id="form-category" value="1" <?php if($_GET['cat']==1){ echo 'checked'; } ?>/> Pride</label><br/>
+	<label><input type="radio" name="category" value="2" <?php if($_GET['cat']==2){ echo 'checked'; } ?> /> Passion</label><br/>
+	<label><input type="radio" name="category" value="3" <?php if($_GET['cat']==3){ echo 'checked'; } ?>/> Bravery</label><br/>
+	<label><input type="radio" name="category" value="3" <?php if($_GET['cat']==4){ echo 'checked'; } ?>/> Self-Awareness</label><br/>
+	<label><input type="radio" name="category" value="3" <?php if($_GET['cat']==5){ echo 'checked'; } ?>/> Urgency</label><br/>
+	<label><input type="radio" name="category" value="4" <?php if($_GET['cat']==6){ echo 'checked'; } ?>/> Attendance</label></div>
 
                                             </div>
 

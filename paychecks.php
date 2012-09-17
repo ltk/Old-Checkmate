@@ -354,9 +354,11 @@ $(function(){
 		<h2 class="title" style="margin-top:0;"><?php if($students){ echo $students[$current_record]->first_name." ".$students[$current_record]->last_name."'s Paycheck"; } else { echo "No Student Found"; }?> <a href="lightning.php?s=<?php echo $students[$current_record]->id; ?>" class="button help"  data-icon-primary="ui-icon-plus" data-icon-only="true" id="add-comment">Add Comment</a></h2> 
 		<table class="simple full ui-corner-bottom" style="background:#fff;">
 			<tr>
-				<th class="ui-state-default">Character</th>
-				<th class="ui-state-default">Academic</th>
-				<th class="ui-state-default">Social/Pride</th>
+				<th class="ui-state-default">Pride</th>
+				<th class="ui-state-default">Passion</th>
+				<th class="ui-state-default">Bravery</th>
+				<th class="ui-state-default">Self-Awareness</th>
+				<th class="ui-state-default">Urgency</th>
 				<th class="ui-state-default">Attendance</th>
 				<th class="ui-state-default"><strong>Total</strong></th>
 			</tr>
@@ -365,18 +367,31 @@ $(function(){
 				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 2, 2); }  ?></td>
 				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 3, 3); }  ?></td>
 				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 4, 4); }  ?></td>
-				<td class='ac'><?php if($students) { echo "$".( pc_field($students, $current_record, 1, 1) + pc_field($students, $current_record, 2, 2) + pc_field($students, $current_record, 3, 3) + pc_field($students, $current_record, 4, 4)); }  ?></td>
+				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 5, 5); }  ?></td>
+				<td class='ac'><?php if($students) { print_pc_field($students, $current_record, 6, 6); }  ?></td>
+				<td class='ac'><?php if($students) { echo "$".( pc_field($students, $current_record, 1, 1) + pc_field($students, $current_record, 2, 2) + pc_field($students, $current_record, 3, 3) + pc_field($students, $current_record, 4, 4) + pc_field($students, $current_record, 5, 5) + pc_field($students, $current_record, 6, 6)); }  ?></td>
+			</tr>
+			<?php
+			$start_ts = $_SESSION['t1'];	
+			$end_ts = $_SESSION['t2'];
+			$diff = strtotime($end_ts) - strtotime($start_ts);
+			$days_since = round($diff / 86400);
+			$weeks_since = floor($days_since/7);
+
+			$sum = 40 * $weeks_since; 
+			?>
+			<tr>
+				<td class='ac' colspan="6">Starting Amount:</td>
+				<td class='ac'>+ $<?php echo $sum; ?></td>
 			</tr>
 			<tr>
-				<td class='ac' colspan="4">Starting Amount:</td>
-				<td class='ac'>+ $40</td>
-			</tr>
-			<tr>
 				<td class='ac'></td>
 				<td class='ac'></td>
 				<td class='ac'></td>
 				<td class='ac'></td>
-				<td class='ac' style="font-size:1.5em;padding-top:5px;"><?php if($students) { echo "<strong>$".( 40+ pc_field($students, $current_record, 1, 1) + pc_field($students, $current_record, 2, 2) + pc_field($students, $current_record, 3, 3) + pc_field($students, $current_record, 4, 4))."</strong>"; }  ?></td>
+				<td class='ac'></td>
+				<td class='ac'></td>
+				<td class='ac' style="font-size:1.5em;padding-top:5px;"><?php if($students) { echo "<strong>$".( $sum + pc_field($students, $current_record, 1, 1) + pc_field($students, $current_record, 2, 2) + pc_field($students, $current_record, 3, 3) + pc_field($students, $current_record, 4, 4))."</strong>"; }  ?></td>
 			</tr>
 		</table>  
 </div>
@@ -412,7 +427,7 @@ $(function(){
 												elseif ($comment->amount > 0) { $comment_class = "green"; } else {
 													$comment_class = "";
 												}
-												$category = array('','Character', 'Academic', 'Social', 'Attendance');
+												$category = array('','Pride', 'Passion', 'Bravery', 'Self-Aware', 'Urgency', 'Attendance');
 												$line = "<tr><td ";
 												$line .= ($comment->amount<0) ? "style='color:red;text-align:center;' >-" : "" ;
 												$line .= ($comment->amount>0) ? "style='color:green;text-align:center;' >" : "" ;
