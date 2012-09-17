@@ -49,13 +49,17 @@ endwhile;
 
 	$sql = "SELECT id, pref_name FROM teachers";
 	$teacher_info = mysql_query($sql,$con);
-	while($row = mysql_fetch_array($teacher_name)){
+	while($row = mysql_fetch_array($teacher_info)){
 		$teacher_names[$row['id']] = $row['pref_name'];
 	}
 	
 	foreach($students as $student):
 		foreach($student->comments as $comment):
-			$comment->teacher_name = $teacher_names[$comment->teacher];
+			if(isset($teacher_names[$comment->teacher])){
+				$comment->teacher_name = $teacher_names[$comment->teacher];
+			} else {
+				$comment->teacher_name = '';
+			}
 		endforeach;
 	endforeach;
 
@@ -160,9 +164,9 @@ function SummarySheet($students)
 {
 	
 	// Column widths
-	$w = array(60, 40, 40);
+	$w = array(60, 30, 30, 30);
 	
-	$header = ($_GET['class']==4) ? array('Student', 'Semester Average', 'This Period') : array('Student', 'Average for Year', 'This Period');
+	$header = ($_GET['class']==4) ? array('Student', 'Semester Average', 'This Period Total', 'This Period Avg') : array('Student', 'Average for Year', 'This Period Total', 'This Period Avg');
 	// Header
 	for($i=0;$i<count($header);$i++)
 		$this->Cell($w[$i],5,$header[$i],1,0,'C');
@@ -178,7 +182,9 @@ function SummarySheet($students)
 		$name = $student->last_name.', '.$student->first_name;
 		$this->Cell($w[0],4,$name,'LR',0,'L',$fill);
 		$this->Cell($w[1],4,"$".round($student->get_average(),2),'LR',0,'C',$fill);
-		$this->Cell($w[2],4,"$".$student->current_paycheck_amount(),'LR',0,'C',$fill);
+		$current_average = $student->current_paycheck_amount();
+		$this->Cell($w[2],4,"$".$current_average,'LR',0,'C',$fill);
+		$this->Cell($w[3],4,"$".$student->current_period_average($current_average),'LR',0,'C',$fill);
 		$this->Ln();
 		$fill = !$fill;
 		$number_of_students ++;

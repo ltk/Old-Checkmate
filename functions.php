@@ -297,25 +297,17 @@ class Student
 		// 		}
 		
 		$sum = 0;
-		if($this->class==4){
-			foreach ($this->all_comments as $comment):
-				if(strtotime($comment->created) > strtotime('2012-01-22'))
-					$sum += $comment->amount;
-			endforeach;
-		} else {
-			foreach ($this->all_comments as $comment):
-				$sum += $comment->amount;
-			endforeach;
-		}
+
+		foreach ($this->all_comments as $comment):
+			$sum += $comment->amount;
+		endforeach;
+		
 		
 
 			
 		
-		if($this->class==4){
-			$start_ts = strtotime("2012-01-22");
-		} else {
-			$start_ts = strtotime("2011-09-12");	
-		}
+
+			$start_ts = strtotime("2011-09-12 00:00:00");	
 			$end_ts = time();
 			$diff = $end_ts - $start_ts;
 			$days_since = round($diff / 86400);
@@ -328,8 +320,12 @@ class Student
 		$sum += ($weeks_since*40);
 		
 		
+		if($weeks_since>0){
+			$this->average = (($sum/$weeks_since));
+		} else {
+			$this->average = "Undefined";
+		}
 		
-		$this->average = (($sum/$weeks_since));
 		//$this->current_paycheck_amount = rand(-150,150);
 		
 		//return $sum;
@@ -344,7 +340,14 @@ class Student
 		//if ($status):
 		// sum up most amount entries for the period of the current paycheck
 		//endif;
-		$sum = 40; 
+
+		$start_ts = $_SESSION['t1'];	
+		$end_ts = $_SESSION['t2'];
+		$diff = strtotime($end_ts) - strtotime($start_ts);
+		$days_since = round($diff / 86400);
+		$weeks_since = floor($days_since/7);
+
+		$sum = 40 * $weeks_since; 
 		foreach ($this->comments as $comment):
 		if (strtotime($comment->created) > strtotime($_SESSION['t1']) && strtotime($comment->created) < strtotime($_SESSION['t2'])):
 		$sum += $comment->amount;
@@ -353,6 +356,16 @@ class Student
 		$this->current_paycheck_amount = $sum;
 		//$this->current_paycheck_amount = rand(-150,150);
 		return $this->current_paycheck_amount;
+	}
+
+	function current_period_average( $amount ){
+		$start_ts = $_SESSION['t1'];	
+		$end_ts = $_SESSION['t2'];
+		$diff = strtotime($end_ts) - strtotime($start_ts);
+		$days_since = round($diff / 86400);
+		$weeks_since = floor($days_since/7);
+		
+		return $amount / $weeks_since;
 	}
 	
 	function get_comments($array){

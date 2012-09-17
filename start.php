@@ -19,8 +19,8 @@ $now = time();
 $day = date('w');
 $start = time() - (24*60*60*intval($day));
 $end = $start + (7*24*60*60);
-$start_date = date('Y-m-d', $start);
-$end_date = date('Y-m-d', $end);
+$start_date = date('Y-m-d 00:00:00', $start);
+$end_date = date('Y-m-d 23:59:59', $end);
 
 if (!$_SESSION['t1']): $_SESSION['t1'] = $start_date; endif;
 if (!$_SESSION['t2']): $_SESSION['t2'] = $end_date; endif;

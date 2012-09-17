@@ -10,8 +10,8 @@ while ($row = mysql_fetch_object($result, 'Student')):
 endwhile;
 }
 	// Populate the comments array with comment objects.
-	$startdate = date('Y-m-j',strtotime($_SESSION['t1']));
-	$enddate = date('Y-m-j',strtotime($_SESSION['t2']));
+	$startdate = date('Y-m-j 00:00:00',strtotime($_SESSION['t1']));
+	$enddate = date('Y-m-j 23:59:59',strtotime($_SESSION['t2']));
 	$sql = "SELECT * from comments WHERE created BETWEEN '$startdate' AND '$enddate'";
 	$result = mysql_query($sql,$con);
 	if($result){
