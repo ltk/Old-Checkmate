@@ -156,7 +156,22 @@ $(window).load(function(){
 </style> 
 
 <!-- LOADING SCRIPT END -->
+<script type="text/javascript">
+$(function(){
+    var color_index = 0;
+    var int=self.setInterval(function(){color_change()},50);
 
+    function color_change(){
+        
+        color_val = color_index * 360;
+        $('#blue-bar').css('background', 'hsl(' + color_val + ', 60%, 60%)');
+
+        color_index += 0.001;
+        if( color_index > 1 ){ color_index = 0; }
+        console.log( color_index );
+    }
+});
+</script>
 
 <script type="text/javascript">
 
@@ -204,8 +219,8 @@ $(window).load(function(){
 
           </ul>
 
-          <h2 style="font-size:35px;font-family: 'Days One', sans-serif;">CheckMate<span style="font-family:arial, sans-serif;font-size:16px;position:relative;top:-15px;"><a href="#" title="It's not perfect, but with your help it will be!">&beta;</a></span></h2>
-<h4 style="margin:7px 0 10px 0;font-weight:normal;margin-left:3px;"><a href="http://www.thejakegroup.com/about/team/lawson/" title="I make websites!">by Lawson T. Kurtz</a></h4>
+          <h2 style="font-size:35px;font-family: 'Days One', sans-serif;">CheckMate<!-- <span style="font-family:arial, sans-serif;font-size:16px;position:relative;top:-15px;"><a href="#" title="It's not perfect, but with your help it will be!">&beta;</a></span> --></h2>
+<h4 style="margin:7px 0 10px 0;font-weight:normal;margin-left:3px;"><a href="http://www.ca2plus.com/" title="Visit Calcium Internet Engineering" >by Ca<sup style="font-family:arial, sans-serif;font-size:11px;position:relative;top:-5px;">2+</sup></a></h4>
 
       </header>
 

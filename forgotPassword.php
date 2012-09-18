@@ -182,7 +182,22 @@ $(window).load(function(){
 </style> 
 
 <!-- LOADING SCRIPT END -->
+<script type="text/javascript">
+$(function(){
+    var color_index = 0;
+    var int=self.setInterval(function(){color_change()},50);
 
+    function color_change(){
+        
+        color_val = color_index * 360;
+        $('#blue-bar').css('background', 'hsl(' + color_val + ', 60%, 60%)');
+
+        color_index += 0.001;
+        if( color_index > 1 ){ color_index = 0; }
+        console.log( color_index );
+    }
+});
+</script>
 
 <script type="text/javascript">
 
